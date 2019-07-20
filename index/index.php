@@ -1,4 +1,7 @@
 <?php
+/*
+	博客首页
+*/
 namespace index;
 
 use  lib\Db;
