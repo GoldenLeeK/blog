@@ -16,7 +16,7 @@ $pageSize = 4;
 //分类获取文章
 $cid = isset($_GET['cid']) ? (int)$_GET['cid'] : 0;
 $path = './index.php';
-var_dump($path);
+
 //获取文章分类
 $cates = $db->table('cates')->lists();
 //获取文章内容
