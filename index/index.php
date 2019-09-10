@@ -17,9 +17,11 @@ $pageSize = 4;
 //分类获取文章
 $cid = isset($_GET['cid']) ? (int)$_GET['cid'] : 0;
 $path = './index.php';
-
+//获取用户信息
+$user = $db->table('user')->where('id=1')->limit('')->order('')->item();
 //获取文章分类
 $cates = $db->table('cates')->lists();
+
 //获取文章内容
 if ($cid != 0) {
     $data = $db->table('article')->where("article_cate_id = $cid")->order('article_upload_time desc')->pages($page, $pageSize, $path . "?cid=$cid");
@@ -27,5 +29,12 @@ if ($cid != 0) {
     $data = $db->table('article')->order('article_upload_time desc')->pages($page, $pageSize, $path);
 }
 //分类标签页按钮样式
-$label = array('btn-primary', 'btn-success', 'btn-info', 'btn-warning', 'btn-default', 'btn-danger');
+$labels = array('btn-default','btn-primary', 'btn-success', 'btn-info', 'btn-warning', 'btn-danger');
+
+//渲染首页数据
+$smarty->assign('ROOT','http://192.168.33.10/blog');
+$smarty->assign('cates',$cates);
+$smarty->assign('label',$labels);
+$smarty->display('index.html');
+
 ?>
