@@ -69,6 +69,10 @@ class Db
      */
     public function table($table)
     {
+        $this->filed = '';
+        $this->limit = '';
+        $this->order = '';
+        $this->where = '';
         $this->table = $table;
         return $this;
     }
