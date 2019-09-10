@@ -7,10 +7,12 @@ namespace index;
 use  libs\Db;
 
 session_start();
-//加载Smarty初始化类
-require dirname(__DIR__) .'/init.inc.php';
+
 //自动加载类
-require_once dirname(__DIR__) . '/autoload.php';
+
+
+
+require dirname(__DIR__) .'/init.inc.php';
 $db = Db::getInstance();
 $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
 $pageSize = 4;
@@ -30,9 +32,13 @@ if ($cid != 0) {
 }
 //分类标签页按钮样式
 $labels = array('btn-default','btn-primary', 'btn-success', 'btn-info', 'btn-warning', 'btn-danger');
-
+if ($data['total'] == 0){
+    $data = array();
+}
 //渲染首页数据
 $smarty->assign('ROOT','http://192.168.33.10/blog');
+$smarty->assign('articles',$data);
+$smarty->assign('user',$user);
 $smarty->assign('cates',$cates);
 $smarty->assign('label',$labels);
 $smarty->display('index.html');
