@@ -1,0 +1,53 @@
+{include file = 'common/title' /}
+<title>个人博客</title>
+</head>
+<body>
+{include file = 'common/header' /}
+
+<!--content中心内容-->
+<div class="container">
+    <div>
+        <div class="left_content_div col-md-8">
+            <?php
+            if (!empty($data['result'])) {
+                foreach ($data['result'] as $article) { ?>
+            <div class="article">
+                <h3>
+                    <a href="./details.php?aid=<?php echo $article['id'] ?>"><?php echo $article['article_title'] ?></a>
+                </h3>
+                <p>
+                    <?php echo $article['article_desc'] ?>
+                </p>
+                <div class="info_box">
+                    <span>作者：<?php echo $article['article_author'] ?></span>&nbsp;
+                    <span>时间：<?php echo date('Y-m-d H:i:s', $article['article_upload_time']) ?></span>
+                    <span>浏览量：<?php echo $article['article_visit_count'] ?>次</span>
+                </div>
+            </div>
+
+            <?php }
+            } else {
+                ?>
+            <div class="div_error">
+                <div class="alert alert-info text-center" role="alert">抱歉，暂时没有文章......</div>
+                <a href="./index.php" style="float: right">返回首页</a>
+            </div>
+            <?php } ?>
+        </div>
+
+    </div>
+    <!--    right-->
+    {include file = 'common/right' /}
+</div>
+<!--分页-->
+<div>
+    <?php echo $data['pages']; ?>
+</div>
+<!--/content-->
+
+<!--footer-->
+{include file = 'common/footer' /}
+<!--/footer-->
+</body>
+
+</html>
