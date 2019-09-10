@@ -7,8 +7,8 @@
  * 博客管理
  */
 
-use lib\Db;
-use lib\Config;
+use libs\Db;
+use libs\Config;
 session_start();
 require_once '../autoload.php';
 if (!isset($_SESSION['user'])) {
@@ -22,7 +22,7 @@ $path = './articleList.php';
 $articles = Db::getInstance()->table('article')->filed('id,article_title')->pages($page, $pageSize, $path);
 ?>
 <?php include_once './common/title.php'; ?>
-    <title>个人博客后台中心</title>
+    <title>个人博客管理</title>
     <style>
         #sidebar {
             width: 200px;

@@ -7,7 +7,7 @@
  */
 
 //自动加载类
-require_once dirname(__DIR__) . '\autoload.php';
+require_once dirname(__DIR__) . '/autoload.php';
 
 session_start();
     if (!isset($_SESSION['user'])){

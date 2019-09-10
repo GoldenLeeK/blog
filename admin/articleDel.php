@@ -7,7 +7,7 @@
  * 博客文章删除
  */
 
-use lib\Db;
+use libs\Db;
 require_once '../autoload.php';
 session_start();
 header('Content-Type:application/json');

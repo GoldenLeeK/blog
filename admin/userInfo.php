@@ -10,7 +10,7 @@
 session_start();
 require_once '../autoload.php';
 
-use lib\Db;
+use libs\Db;
 
 if (!isset($_SESSION['user'])) {
     echo "<script>alert('请登陆后访问！');location.href='./login.php'</script>";

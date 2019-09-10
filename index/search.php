@@ -8,11 +8,11 @@
  */
 namespace index;
 
-use  lib\Db;
+use  libs\Db;
 
 session_start();
 //自动加载类
-require_once dirname(__DIR__) . '\autoload.php';
+require_once dirname(__DIR__) . '/autoload.php';
 $db = DB::getInstance();
 //分类获取文章
 $cid = isset($_GET['cid']) ? $_GET['cid'] : 0;

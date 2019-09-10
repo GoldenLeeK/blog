@@ -6,7 +6,7 @@
  * Time: 15:19
  */
 
-use lib\Db;
+use libs\Db;
 session_start();
 
 if (!isset($_SESSION['user'])) {
@@ -20,7 +20,7 @@ $cates = $db->table('cates')->lists();
 ?>
 
 <?php include_once './common/title.php'; ?>
-<title>个人博客后台中心</title>
+<title>个人博客发布</title>
 
 </head>
 <body>

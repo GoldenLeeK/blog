@@ -8,9 +8,9 @@
  */
 session_start();
 //自动加载类
-require_once dirname(__DIR__) . '\autoload.php';
+require_once dirname(__DIR__) . '/autoload.php';
 
-use lib\Upload;
+use libs\Upload;
 $tool = new Upload();
 if ($_POST) {
     $path = '../upload/images';
@@ -25,11 +25,11 @@ if ($_POST) {
     $userId = (int)$_SESSION['user']['id'];
     if ($result['code'] == 1){
         $data['logo'] = $result['url'];
-        $row = \lib\Db::getInstance()->table('user')->where("id=$userId")->update($data);
+        $row = \libs\Db::getInstance()->table('user')->where("id=$userId")->update($data);
         echo "<script>alert('恭喜你，更新成功');location.href='userinfo.php'</script>";
     }
     if ($result['code'] == -1){
-        $row = \lib\Db::getInstance()->table('user')->where("id=$userId")->update($data);
+        $row = \libs\Db::getInstance()->table('user')->where("id=$userId")->update($data);
         echo "<script>alert('恭喜你，更新成功');location.href='userinfo.php'</script>";
     }
     if ($result['code'] == 0){

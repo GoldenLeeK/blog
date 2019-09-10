@@ -7,7 +7,7 @@
  * 博客分类删除
  */
 
-use lib\Db;
+use libs\Db;
 
 session_start();
 header('Content-Type:application/json');

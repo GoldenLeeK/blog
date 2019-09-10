@@ -7,7 +7,7 @@
  * 博客管理
  */
 
-use lib\Db;
+use libs\Db;
 
 session_start();
 require_once '../autoload.php';
@@ -50,8 +50,8 @@ if ($startTime && $endTime ){
 
     <!-- 以下两个插件用于在IE8以及以下版本浏览器支持HTML5元素和媒体查询，如果不需要用可以移除 -->
     <!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <script src="https://oss.maxcdn.com/libss/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libss/respond.js/1.4.2/respond.min.js"></script>
 
     <![endif]-->
     <title>博客列表</title>

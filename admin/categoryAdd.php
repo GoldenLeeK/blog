@@ -7,7 +7,7 @@
  * 博客分类增加页
  */
 
-use lib\Db;
+use libs\Db;
 
 session_start();
 if (!isset($_SESSION['user'])) {

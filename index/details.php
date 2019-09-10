@@ -6,10 +6,10 @@
  * Time: 16:02
  */
 
-use  lib\Db;
+use  libs\Db;
 session_start();
 //自动加载类
-require_once dirname(__DIR__) . '\autoload.php';
+require_once dirname(__DIR__) . '/autoload.php';
 $db = Db::getInstance();
 //获取文章分类
 $cates = $db->table('cates')->lists();
@@ -26,8 +26,8 @@ if ($articleId != 0) {
     $article = $db->table('article')->filed('*')->where("id = $articleId")->item();
 }
 ?>
-<?php include_once './common/title.php' ?>
-    <title><?php if ($article) echo $article['article_title']?></title>
+<?php include_once './common/title.html' ?>
+    <title><?php if ($article) {echo $article['article_title'];} else{echo '文章不存在~';}?></title>
 </head>
 <body>
 <?php include_once "./common/header.php" ?>

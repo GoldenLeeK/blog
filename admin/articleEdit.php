@@ -7,7 +7,7 @@
  * 博客编辑详情页
  */
 
-use lib\Db;
+use libs\Db;
 
 session_start();
 if (!isset($_SESSION['user'])) {

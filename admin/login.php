@@ -4,7 +4,7 @@
             echo "<script>alert('请勿重复登陆');location.href='./index.php'</script>";
         }
 //自动加载类
-require_once dirname(__DIR__) . '\autoload.php';
+require_once dirname(__DIR__) . '/autoload.php';
 ?>
 <?php include_once './common/title.php'; ?>
     <style>

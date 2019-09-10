@@ -10,7 +10,7 @@ require_once '../autoload.php';
 //获取图片
 $file = $_FILES['uploadImages'];
 $path = '../upload/images';
-$uploadTool = new \lib\Upload();
+$uploadTool = new \libs\Upload();
 $uploadTool->uploadEditor($file,$path);
 
 

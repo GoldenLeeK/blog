@@ -4,12 +4,12 @@
 */
 namespace index;
 
-use  lib\Db;
-use lib\Config;
+use  libs\Db;
+
 
 session_start();
 //自动加载类
-require_once dirname(__DIR__) . '\autoload.php';
+require_once dirname(__DIR__) . '/autoload.php';
 $db = Db::getInstance();
 $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
 $pageSize = 4;

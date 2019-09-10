@@ -7,7 +7,7 @@
  * 博客分类管理
  */
 
-use lib\Db;
+use libs\Db;
 
 session_start();
 require_once '../autoload.php';

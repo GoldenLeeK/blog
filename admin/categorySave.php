@@ -6,7 +6,7 @@
  * Time: 12:52
  * 保存分类
  */
-namespace lib;
+namespace libs;
 session_start();
 require_once '../autoload.php';
 //接收前端发过来的数据
