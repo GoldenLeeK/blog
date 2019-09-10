@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Smarty Autoloader
  *
@@ -91,7 +92,20 @@ class Smarty_Autoloader
     public static function autoload($class)
     {
         if ($class[ 0 ] !== 'S' && strpos($class, 'Smarty') !== 0) {
-            return;
+
+            $className= ltrim($class, '\\');
+
+            $fileName  = '';
+            $namespace = '';
+            if ($lastNsPos = strrpos($className, '\\')) {
+                $namespace = substr($className, 0, $lastNsPos);
+                $className= substr($className, $lastNsPos + 1);
+                $fileName  = dirname(__DIR__).DIRECTORY_SEPARATOR.$namespace.DIRECTORY_SEPARATOR;
+
+            }
+            $fileName .= str_replace('_', DIRECTORY_SEPARATOR, $className) . '.class.php';
+
+            require_once $fileName;
         }
         $_class = strtolower($class);
         if (isset(self::$rootClasses[ $_class ])) {
