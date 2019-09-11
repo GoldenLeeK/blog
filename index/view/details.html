@@ -1,0 +1,70 @@
+{include file='common/title.html'}
+<title>{$article.article_title}</title>
+</head>
+<body>
+{include file='common/header.html'}
+
+<!--content中心内容-->
+<div class="container">
+    <div>
+
+        <div class="left_content_div col-md-8">
+            {if empty($article) neq 'true'}
+            <h2 style="text-align: center;margin-bottom: 15px;">{$article.article_title}</h2>
+            <div class="col-md-12 col-xs-12">
+                <div class="info_box">
+                    <span>作者：{$article.article_author}</span>&nbsp;
+                    <span>时间：{$article.article_upload_time|date_format:'Y-m-d H:i:s'}</span>
+                    <span>浏览量：{$article.article_visit_count}次</span>
+                </div>
+            </div>
+            <hr>
+            <div class="col-md-12 " style="margin-top: 15px;">
+                <p>{$article.article_content|htmlspecialchars_decode}</p>
+            </div>
+            <hr>
+            <div class="col-md-12 comment" style="margin-top: 15px;">
+                <div id="lv-container" data-id="city" data-uid="MTAyMC80NTM2OC8yMTg4MQ==">
+                </div>
+            </div>
+        </div>
+        {else}
+        <div class="div_error">
+            <div class="alert alert-info text-center" role="alert">抱歉，暂时没有此文章......</div>
+            <a href="./index.php" style="float: right">返回首页</a>
+        </div>
+        {/if}
+    </div>
+    <!--    right-->
+    {include file='common/right.html'}
+</div>
+<!--/content-->
+
+<!--footer-->
+{include file='common/footer.html'}
+<!--/footer-->
+</body>
+<script type="text/javascript">
+    window.livereOptions = {
+        //配置refer
+        refer: 'www.php.com/details.php?aid={$article.id}?>'
+    };
+    (function (d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+
+        if (typeof LivereTower === 'function') {
+            return;
+        }
+
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+
+        e.parentNode.insertBefore(j, e);
+    })(document, 'script');
+</script>
+<noscript> 为正常使用来必力评论功能请激活JavaScript</noscript>
+
+<!-- City版安装代码已完成 -->
+
+</html>
