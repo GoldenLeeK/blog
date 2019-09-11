@@ -160,7 +160,7 @@ class Db
      */
     public function insert($data)
     {
-        $sql = $this->buildSql('insert', $data);exit($sql);
+        $sql = $this->buildSql('insert', $data);
         $stmt = $this->pdo->prepare($sql);
         $stmt->execute();
         $result = $stmt->rowCount();
