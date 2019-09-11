@@ -8,7 +8,8 @@
  */
 
 use libs\Db;
-require_once '../autoload.php';
+//自动加载类(smarty)
+require dirname(__DIR__) .'/init.inc.php';
 session_start();
 header('Content-Type:application/json');
 if (!isset($_SESSION['user'])) {

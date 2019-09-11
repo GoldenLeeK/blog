@@ -7,8 +7,8 @@
  * 用户信息保存
  */
 session_start();
-//自动加载类
-require_once dirname(__DIR__) . '/autoload.php';
+//自动加载类(smarty)
+require dirname(__DIR__) .'/init.inc.php';
 
 use libs\Upload;
 $tool = new Upload();

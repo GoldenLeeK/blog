@@ -8,7 +8,8 @@
  */
 namespace libs;
 session_start();
-require_once '../autoload.php';
+//自动加载类(smarty)
+require dirname(__DIR__) .'/init.inc.php';
 //接收前端发过来的数据
 $data['cate_name'] = htmlspecialchars(trim($_POST['name']),true);
 

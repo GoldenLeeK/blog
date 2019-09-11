@@ -15,7 +15,8 @@ header('Content-Type:application/json');
 $username = trim($_POST['username']);
 $password = trim($_POST['password']);
 
-require_once dirname(__DIR__) . '/autoload.php';
+//自动加载类(smarty)
+require dirname(__DIR__) .'/init.inc.php';
 $db = Db::getInstance();
 $user = $db->table('user')->where(['username'=>$username])->item();
 

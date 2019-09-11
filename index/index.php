@@ -8,11 +8,8 @@ use  libs\Db;
 
 session_start();
 
-//自动加载类
-
-
-
-require dirname(__DIR__) .'/init.inc.php';
+//自动加载类(smarty)
+require dirname(__DIR__) . '/init.inc.php';
 $db = Db::getInstance();
 $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
 $pageSize = 4;
@@ -31,16 +28,16 @@ if ($cid != 0) {
     $data = $db->table('article')->order('article_upload_time desc')->pages($page, $pageSize, $path);
 }
 //分类标签页按钮样式
-$labels = array('btn-default','btn-primary', 'btn-success', 'btn-info', 'btn-warning', 'btn-danger');
-if ($data['total'] == 0){
-    $data = array();
+$labels = array('btn-default', 'btn-primary', 'btn-success', 'btn-info', 'btn-warning', 'btn-danger');
+if ($data['total'] == 0) {
+    $data['result'] = array();
 }
 //渲染首页数据
-$smarty->assign('ROOT','http://192.168.33.10/blog');
-$smarty->assign('articles',$data);
-$smarty->assign('user',$user);
-$smarty->assign('cates',$cates);
-$smarty->assign('label',$labels);
+$smarty->assign('ROOT', 'http://192.168.33.10/blog');
+$smarty->assign('articles', $data);
+$smarty->assign('user', $user);
+$smarty->assign('cates', $cates);
+$smarty->assign('label', $labels);
 $smarty->display('index.html');
 
 ?>

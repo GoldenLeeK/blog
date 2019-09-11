@@ -14,7 +14,8 @@ header('Content-Type:application/json');
 if (!isset($_SESSION['user'])) {
     echo "<script>alert('请登陆后访问！');location.href='./login.php'</script>";
 }
-require_once '../autoload.php';
+//自动加载类(smarty)
+require dirname(__DIR__) .'/init.inc.php';
 $db = Db::getInstance();
 $cid = isset($_GET['id']) ? $_GET['id'] : 0;
 if ($db->table('cates')->where("id=$cid")->delete()) {

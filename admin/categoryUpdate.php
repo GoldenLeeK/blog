@@ -9,7 +9,8 @@
 
 namespace libs;
 session_start();
-require_once '../autoload.php';
+//自动加载类(smarty)
+require dirname(__DIR__) .'/init.inc.php';
 //接收前端发过来的数据
 $id = (int)$_POST['id'];
 $data['cate_name']  =  $_POST['name'];

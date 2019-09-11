@@ -6,8 +6,9 @@
  * Time: 15:19
  */
 
-//自动加载类
-require_once dirname(__DIR__) . '/autoload.php';
+
+//自动加载类(smarty)
+require dirname(__DIR__) .'/init.inc.php';
 
 session_start();
     if (!isset($_SESSION['user'])){

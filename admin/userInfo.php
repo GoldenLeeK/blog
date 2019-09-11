@@ -8,7 +8,8 @@
  */
 
 session_start();
-require_once '../autoload.php';
+//自动加载类(smarty)
+require dirname(__DIR__) .'/init.inc.php';
 
 use libs\Db;
 

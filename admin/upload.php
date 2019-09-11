@@ -6,7 +6,8 @@
  * Time: 13:45
  * wangeditor图片上传
  */
-require_once '../autoload.php';
+//自动加载类(smarty)
+require dirname(__DIR__) .'/init.inc.php';
 //获取图片
 $file = $_FILES['uploadImages'];
 $path = '../upload/images';
