@@ -10,7 +10,8 @@
 use libs\Db;
 
 session_start();
-require_once '../autoload.php';
+//自动加载类(smarty)
+require dirname(__DIR__) .'/init.inc.php';
 if (!isset($_SESSION['user'])) {
     echo "<script>alert('请登陆后访问！');location.href='./login.php'</script>";
 }
