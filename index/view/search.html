@@ -1,0 +1,51 @@
+{include file='common/title.html'}
+<title>文章搜索</title>
+</head>
+<body>
+{include file='common/header.html'}
+
+<!--content中心内容-->
+<div class="container">
+    <div>
+        <div class="left_content_div col-md-8">
+            {foreach $article.result as $vo}
+            <div class="article">
+                <h3>
+                    <a href="./details.php?aid={$vo.id}">{$vo.article_title}</a>
+                </h3>
+                <p>
+                    {$vo.article_desc}
+                </p>
+                <div class="info_box">
+                    <span>作者：{$vo.article_author}</span>
+                    <span>时间：{$vo.article_upload_time|date_format:'Y-m-d H:i:s'}</span>
+                    <span>浏览量：{$vo.article_visit_count}次</span>
+                </div>
+
+            </div>
+            {foreachelse}
+            <div class="div_error">
+                <div class="alert alert-info text-center" role="alert">抱歉，暂时此没有文章......</div>
+                <a href="./index.php" style="float: right">返回首页</a>
+            </div>
+            {/foreach}
+        </div>
+
+    </div>
+    <!--    right-->
+    {include file='common/right.html'}
+</div>
+<!--分页-->
+<!--<div>-->
+{$article.pages}
+<!--</div>-->
+</div>
+
+<!--/content-->
+
+<!--footer-->
+{include file='common/footer.html'}
+<!--/footer-->
+</body>
+
+</html>
