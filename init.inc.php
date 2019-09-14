@@ -10,7 +10,7 @@ define('ROOT', str_replace('\\', '/', dirname(__FILE__)) . '/');
 require ROOT . 'libs/Smarty.class.php';
 
 $smarty = new Smarty();
-$smarty->caching = true;
+$smarty->caching = false;
 $smarty->setTemplateDir(ROOT . 'index/view')
         ->addTemplateDir(ROOT . 'admin/view')
         ->setCompileDir(ROOT . 'view_c')
