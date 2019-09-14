@@ -1,0 +1,54 @@
+{include file='common/admin_title.html'}
+<title>博客分类管理</title>
+</head>
+<body>
+<div class="row">
+    {include file='common/admin_header.html'}
+    <!--侧边栏-->
+    {include file='common/admin_left.html'}
+    <!--主页面-->
+    <div id="main">
+        <a class="btn btn-primary" href="./categoryAdd.php">增加</a>
+        <table class="table table-bordered ">
+            <tr>
+                <th>分类id</th>
+                <th>分类名字</th>
+                <th>操作</th>
+            </tr>
+            {foreach $cates.result as $vo}
+            <tr class="article_tr_{$vo.id}">
+                <td>{$vo.id}</td>
+                <td><a href="./categoryEdit.php?cid={$vo.id}">{$vo.cate_name}</a>
+                </td>
+                <td>
+                    <a class="btn btn-primary" style="margin-right: 15px;"
+                       href="./categoryEdit.php?cid={$vo.id}">编辑</a>
+                    <a class="btn btn-danger" onclick="articleDel({$vo.id})">删除</a>
+                </td>
+            </tr>
+            {/foreach}
+        </table>
+        <!--        分页-->
+        <div class="text-center">{$cates.pages}</div>
+    </div>
+    {include file='common/admin_footer.html'}
+</div>
+<script>
+    // ajax删除博客
+    function articleDel(id) {
+        flag = confirm('确定删除该分类吗?');
+        if (flag) {
+            $.get('categoryDel.php', { id: id }, function (data){
+                if (data.code == 1){
+                    $('.article_tr_' + id).remove();
+                    alert(data.msg);
+                }
+                if (data.code == 0) {
+                    alert(data.msg);
+                }
+            });
+        }
+    }
+</script>
+</body>
+</html>
