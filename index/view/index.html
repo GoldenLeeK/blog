@@ -1,5 +1,5 @@
 {include file='common/title.html'}
-<title>个人博客</title>
+<title>小黄鸡博客</title>
 </head>
 <body>
 {include file='common/header.html'}
@@ -8,31 +8,26 @@
 <div class="container">
     <div>
         <div class="left_content_div col-md-8">
-            <?php
-            if (!empty($data['result'])) {
-                foreach ($data['result'] as $article) { ?>
+            {foreach $articles.result as $vo}
             <div class="article">
                 <h3>
-                    <a href="./details.php?aid=<?php echo $article['id'] ?>"><?php echo $article['article_title'] ?></a>
+                    <a href="./details.php?aid={$vo.id}">{$vo.article_title}</a>
                 </h3>
                 <p>
-                    <?php echo $article['article_desc'] ?>
+                    {$vo.article_desc}
                 </p>
                 <div class="info_box">
-                    <span>作者：<?php echo $article['article_author'] ?></span>&nbsp;
-                    <span>时间：<?php echo date('Y-m-d H:i:s', $article['article_upload_time']) ?></span>
-                    <span>浏览量：<?php echo $article['article_visit_count'] ?>次</span>
+                    <span>作者：{$vo.article_author}</span>&nbsp;
+                    <span>时间：{$vo.article_upload_time|date_format:'Y-m-d H:i:s'}</span>
+                    <span>浏览量：{$vo.article_visit_count}次</span>
                 </div>
             </div>
-
-            <?php }
-            } else {
-                ?>
+            {foreachelse}
             <div class="div_error">
                 <div class="alert alert-info text-center" role="alert">抱歉，暂时没有文章......</div>
                 <a href="./index.php" style="float: right">返回首页</a>
             </div>
-            <?php } ?>
+            {/foreach}
         </div>
 
     </div>
@@ -41,7 +36,7 @@
 </div>
 <!--分页-->
 <div>
-    <?php echo $data['pages']; ?>
+    {$articles.pages}
 </div>
 <!--/content-->
 
