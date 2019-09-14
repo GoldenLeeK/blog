@@ -16,7 +16,7 @@
                 <li class="" id="blog/index/index.php"><a href="./index.php"><span
                                 class="glyphicon glyphicon-home"></span> 首页</a></li>
                 <li class=""><a href="javascript:void(0);"><span class="glyphicon glyphicon-globe"></span>
-                        欢迎你,<?php echo $_SESSION['user']['username'] ?></a></li>
+                        欢迎你,{$smarty.session.user.username}</a></li>
                 <li class=""><a href="./logout.php" onClick="return confirm('确定退出系统吗?');"><span
                                 class="glyphicon glyphicon-home" ></span> 退出</a></li>
             </ul>
