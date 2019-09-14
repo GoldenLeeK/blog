@@ -6,6 +6,7 @@
  * Time: 15:22
  * 文章搜索
  */
+
 namespace index;
 
 use  libs\Db;
