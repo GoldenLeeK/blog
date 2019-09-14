@@ -1,0 +1,104 @@
+{include file='common/admin_title.html'}
+    <title>博客列表</title>
+<script src="{$ROOT}/statics/js/moment-with-locales.min.js"></script>
+<script src="{$ROOT}/statics/js/bootstrap-datetimepicker.min.js"></script>
+    <style>
+        #sidebar {
+            width: 200px;
+            position: absolute;
+            z-index: 1;
+        }
+
+        #main {
+            margin-left: 210px;
+            margin-right: 10px;
+            width: 1200px;
+            margin-top: 74px;
+        }
+    </style>
+</head>
+<body>
+<div class="row">
+    {include file='common/admin_header.html'}
+    <!--侧边栏-->
+    {include file='common/admin_left.html'}
+    <!--主页面-->
+    <div id="main">
+        <div class="row">
+            <form action="./articleSearch.php" method="post">
+                <div class='col-md-4'>
+                    <div class="form-group">
+                        <div class='input-group date' id='datetimepicker1'>
+                            <input type='text' class="form-control" placeholder="开始时间" name="start" autocomplete="off"/>
+                            <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-calendar"></span>
+                    </span>
+                        </div>
+                    </div>
+                </div>
+                <div class='col-md-4'>
+                    <div class="form-group">
+                        <div class='input-group date' id='datetimepicker2'>
+                            <input type='text' class="form-control" placeholder="结束时间" name="end" autocomplete="off"/ >
+                            <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-calendar"></span>
+                    </span>
+                        </div>
+                    </div>
+                </div>
+                <button class="col-md-2 btn" type="submit">搜索</button>
+            </form>
+        </div>
+        <table class="table table-bordered ">
+            <tr>
+                <th>博客id</th>
+                <th>博客标题</th>
+                <th>操作</th>
+            </tr>
+            {foreach $articles.result as $vo}
+            <tr class="article_tr_{$vo}">
+                <td>{$vo.id}</td>
+                <td><a href="./articleEdit.php?aid={$vo.id}">{$vo.article_title}</a>
+                </td>
+                <td>
+                    <a class="btn btn-primary" style="margin-right: 15px;"
+                       href="./articleEdit.php?aid={$vo.id}">编辑</a>
+                    <a class="btn btn-danger" onclick="articleDel({$vo.id})">删除</a>
+                </td>
+            </tr>
+            {/foreach}
+        </table>
+        <!--        分页-->
+        <div class="text-center">{$articles.pages}</div>
+    </div>
+
+    {include file='common/admin_footer.html'}
+</div>
+<script>
+    // 时间选择
+    $('#datetimepicker1').datetimepicker({
+        locale: moment().locale('zh-cn')
+    });
+    $('#datetimepicker2').datetimepicker({
+        locale: moment().locale('zh-cn')
+    });
+
+
+    // ajax删除博客
+    function articleDel(id) {
+        flag = confirm('确定删除文章吗?');
+        if (flag) {
+            $.get('articleDel.php', { id: id }, function (data) {
+                if (data.code == 1) {
+                    $('.article_tr_' + id).remove();
+                    alert(data.msg);
+                }
+                if (data.code == 0) {
+                    alert(data.msg);
+                }
+            });
+        }
+    }
+</script>
+</body>
+</html>
