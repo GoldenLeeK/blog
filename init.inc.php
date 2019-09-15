@@ -8,7 +8,7 @@
  */
 define('ROOT', str_replace('\\', '/', dirname(__FILE__)) . '/');
 require ROOT . 'libs/Smarty.class.php';
-
+//smarty引擎
 $smarty = new Smarty();
 $smarty->caching = false;
 $smarty->setTemplateDir(ROOT . 'index/view')
@@ -19,6 +19,9 @@ $smarty->setTemplateDir(ROOT . 'index/view')
         ->setConfigDir(ROOT . 'smarty_configs');
 
 $smarty->cache_lifetime = 60 * 60 * 24;
+//memcache缓存
+$memcache = new \Memcache();
+$memcache->connect('localhost',11211);
 
 
 
