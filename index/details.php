@@ -14,9 +14,9 @@ require dirname(__DIR__) . '/init.inc.php';
 $article = null;
 $db = Db::getInstance();
 //获取文章分类
-$cates = $db->table('cates')->lists();
+$cates = $db->table('cates')->lists($memcache);
 //获取用户信息
-$user = $db->table('user')->where('id=1')->limit('')->order('')->item();
+$user = $db->table('user')->where('id=1')->limit('')->order('')->item($memcache);
 //分类标签页按钮样式
 $labels = array('btn-primary', 'btn-success', 'btn-info', 'btn-warning', 'btn-default', 'btn-danger');
 //获取文章id
@@ -30,6 +30,7 @@ $db->table('article')->where("id=$articleId")->update($count);
 if ($articleId != 0) {
     $article = $db->table('article')->filed('*')->where("id = $articleId")->item();
 }
+$memcache->close();
 //渲染首页数据
 $smarty->assign('ROOT', 'http://192.168.33.10/blog');
 $smarty->assign('label', $labels);
