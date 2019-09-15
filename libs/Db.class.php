@@ -123,19 +123,37 @@ class Db
     }
 
     /*
+     * @param Memcache 传入一个MemCache对象
      * 返回一条数据
      * @return 返回查询结果数据集以数组形式
      */
-    public function item()
+    public function item(\Memcache $memcache = null)
     {
-        //防止用户调用item时调用limit条件
-        if ($this->limit > 1) $this->limit = 1;
-        $sql = $this->buildSql('select');
-        $stmt = $this->pdo->prepare($sql);
-        $stmt->execute();
-        $result = $stmt->fetchAll(\PDO::FETCH_ASSOC);
-        return isset($result[0]) ? $result[0] : $result;
-
+        //memcache为空直接数据库调用，否则使用memcache缓存
+        if (is_null($memcache)) {
+            //防止用户调用item时调用limit条件
+            if ($this->limit > 1) $this->limit = 1;
+            $sql = $this->buildSql('select');
+            $stmt = $this->pdo->prepare($sql);
+            $stmt->execute();
+            $result = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+            return isset($result[0]) ? $result[0] : $result;
+        } else {
+            //防止用户调用item时调用limit条件
+            if ($this->limit > 1) $this->limit = 1;
+            $sql = $this->buildSql('select');
+            $key = md5($sql);
+            $data = $memcache->get($key);
+            if (false == $data) {
+                $stmt = $this->pdo->prepare($sql);
+                $stmt->execute();
+                $result = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+                $data = isset($result[0]) ? $result[0] : $result;
+                //向缓存添加数据
+                $memcache->add($key, $data, MEMCACHE_COMPRESSED,  60*60);
+            }
+            return $data;
+        }
     }
 
     /*
@@ -143,13 +161,26 @@ class Db
     * @param 查询结果数量,默认返回查询全部
     * @return 返回查询结果数据集以数组形式
     */
-    public function lists()
+    public function lists(\Memcache $memcache = null)
     {
-        $sql = $this->buildSql('select');
-        $stmt = $this->pdo->prepare($sql);
-        $stmt->execute();
-        $result = $stmt->fetchAll(\PDO::FETCH_ASSOC);
-        return $result;
+        if (is_null($memcache)) {
+            $sql = $this->buildSql('select');
+            $stmt = $this->pdo->prepare($sql);
+            $stmt->execute();
+            $data = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+            return $data;
+        } else {
+            $sql = $this->buildSql('select');
+            $key = md5($sql);
+            $data = $memcache->get($key);
+            if (false == $data) {
+                $stmt = $this->pdo->prepare($sql);
+                $stmt->execute();
+                $data = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+                $memcache->add($key, $data, MEMCACHE_COMPRESSED,  60*60);
+            }
+            return $data;
+        }
 
     }
 
