@@ -15,7 +15,7 @@ session_start();
 if (!isset($_SESSION['user'])) {
     echo "<script>alert('请登陆后访问！');location.href='./login.php'</script>";
 }
-$db = Db::getInstance();
+
 $smarty->assign('ROOT', 'http://192.168.33.10/blog');
 $smarty->display('admin_index.html');
 ?>
