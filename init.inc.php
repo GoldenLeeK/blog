@@ -20,8 +20,7 @@ $smarty->setTemplateDir(ROOT . 'index/view')
 
 $smarty->cache_lifetime = 60 * 60 * 24;
 //memcache缓存
-$memcache = new \Memcache();
-$memcache->connect('localhost',11211);
+
 
 
 
